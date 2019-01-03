@@ -54,5 +54,5 @@ mkdir $jobDir
 cd $jobDir
 #/home/ea461/dmtcp/dmtcp-2.3.1/bin/dmtcp_launch -i 3 ./a.out
 #./dmtcp_restart_script.sh
-../run_test.sh
+../run_example.sh
 

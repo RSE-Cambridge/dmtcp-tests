@@ -44,9 +44,9 @@ module load dmtcp/2.3.1
 #! Command line that we want to run:
 mkdir job_0
 cd job_0
-srun --exclusive ../run_test.sh &
+srun --exclusive ../run_example.sh &
 cd ..
 
 mkdir job_1
 cd job_1
-srun --exclusive ../run_test.sh
+srun --exclusive ../run_example.sh
