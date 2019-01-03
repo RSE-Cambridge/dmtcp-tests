@@ -25,9 +25,9 @@
 #SBATCH --mem=5990mb
 #! Submit a job array with index values between 0 and 31
 #! NOTE: This must be a range, not a single number (i.e. specifying '32' here would only run one job, with index 32)
-#SBATCH --array=0-2
+#SBATCH --array=0-31
 
-#! This is the partition name. This will request for a node with 6GB RAM for each task
+#! This is the partition name.
 #SBATCH -p skylake-himem
 
 #! mail alert at start, end and abortion of execution
@@ -52,7 +52,6 @@ echo "This is job" $SLURM_ARRAY_TASK_ID
 jobDir=Job_$SLURM_ARRAY_TASK_ID
 mkdir $jobDir
 cd $jobDir
-#/home/ea461/dmtcp/dmtcp-2.3.1/bin/dmtcp_launch -i 3 ./a.out
-#./dmtcp_restart_script.sh
+
 ../run_example.sh
 
