@@ -2,9 +2,6 @@
 RESTARTSCRIPT="dmtcp_restart_script.sh"
 export DMTCP_QUIET=2
 
-runcmd="../example"
-tint=5
-
 runcmd=$1
 tint=$2
 
