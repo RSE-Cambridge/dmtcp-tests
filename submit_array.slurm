@@ -22,13 +22,13 @@
 #! Estimated maximum memory needed (job is force-stopped if exceeded):
 #! RAM is allocated in ~5990mb blocks, you are charged per block used,
 #! and unused fractions of blocks will not be usable by others.
-#SBATCH --mem=100mb
+#SBATCH --mem=5990mb
 #! Submit a job array with index values between 0 and 31
 #! NOTE: This must be a range, not a single number (i.e. specifying '32' here would only run one job, with index 32)
-#SBATCH --array=0-31
+#SBATCH --array=0-2
 
 #! This is the partition name. This will request for a node with 6GB RAM for each task
-#SBATCH -p skylake
+#SBATCH -p skylake-himem
 
 #! mail alert at start, end and abortion of execution
 #! emails will default to going to your email address
@@ -42,6 +42,7 @@
 module purge                               # Removes all modules still loaded
 module load rhel7/default-peta4            # REQUIRED - loads the basic environment
 module load use.own                        # This line loads the own module list
+module load dmtcp/dmtcp-2.3.1
 
 #! The variable $SLURM_ARRAY_TASK_ID contains the array index for each job.
 #! In this example, each job will be passed its index, so each output file will contain a different value
