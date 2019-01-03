@@ -25,7 +25,7 @@
 #SBATCH --mem=100mb
 
 #! This is the partition name. This will request for a node with 6GB RAM for each task
-#SBATCH -p skylake-himem
+#SBATCH -p skylake
 
 #! mail alert at start, end and abortion of execution
 #! emails will default to going to your email address
