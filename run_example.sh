@@ -1,25 +1,29 @@
 #!/bin/bash
 RESTARTSCRIPT="dmtcp_restart_script.sh"
+export DMTCP_QUIET=2
+
+runcmd="../example"
+tint=5
 
 if [ -f "$RESTARTSCRIPT" ]
 then
     echo "Start with checkpoint executable"
 
-    eval "dmtcp_coordinator -q --exit-after-ckpt --exit-on-last --port-file cport.txt -p 0 &"
+    eval "dmtcp_coordinator -q -q --exit-after-ckpt --exit-on-last --port-file cport.txt -p 0 &"
     sleep 1
     cport=$(<cport.txt)
     echo "$cport"
-    CMD="dmtcp_restart -q -i 5 -p "$cport" ./ckpt_*.dmtcp" 
+    CMD="dmtcp_restart -q -q -i "$tint" -p "$cport" ./ckpt_*.dmtcp" 
     echo $CMD
     eval $CMD
 else
     echo "Start new executable"
     
-    eval "dmtcp_coordinator -q --exit-after-ckpt --exit-on-last --port-file cport.txt -p 0 &"
+    eval "dmtcp_coordinator -q -q --exit-after-ckpt --exit-on-last --port-file cport.txt -p 0 &"
     sleep 1
     cport=$(<cport.txt)
     echo "$cport"
-    CMD="dmtcp_launch -q -i 5 -p "$cport" ../example"
+    CMD="dmtcp_launch -q -q -i "$tint" -p "$cport" "$runcmd
     echo $CMD
     eval $CMD
 fi

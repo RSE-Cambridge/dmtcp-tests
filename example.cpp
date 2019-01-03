@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     using namespace std::this_thread;
     using namespace std::chrono; 
         
-    for (int i=0; i<25; i++)
+    for (int i=0; i<120; i++)
     {
         sleep_for(seconds(1));
     
