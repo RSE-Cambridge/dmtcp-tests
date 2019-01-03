@@ -6,6 +6,12 @@ int main(int argc, char *argv[])
 {
     using namespace std::this_thread;
     using namespace std::chrono; 
+    
+    std::cout << "Given command line arguments: " << std::endl;
+    for (int i = 0; i < argc; ++i)
+    {
+        std::cout << argv[i] << std::endl;
+    }
         
     for (int i=0; i<120; i++)
     {
