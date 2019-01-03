@@ -53,5 +53,5 @@ jobDir=Job_$SLURM_ARRAY_TASK_ID
 mkdir $jobDir
 cd $jobDir
 
-../run_example.sh
+../call_dmtcp.sh "../example" 5
 

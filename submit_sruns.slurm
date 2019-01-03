@@ -18,7 +18,7 @@
 #! How many many cores will be allocated per task? (for single core jobs always leave this at 1)
 #SBATCH --cpus-per-task=1 
 #! Estimated runtime: hh:mm:ss (job is force-stopped after if exceeded):
-#SBATCH --time=00:10:00
+#SBATCH --time=00:03:00
 #! Estimated maximum memory needed (job is force-stopped if exceeded):
 #! RAM is allocated in ~5990mb blocks, you are charged per block used,
 #! and unused fractions of blocks will not be usable by others.
@@ -44,9 +44,11 @@ module load dmtcp/2.3.1
 #! Command line that we want to run:
 mkdir job_0
 cd job_0
-srun --exclusive ../run_example.sh &
+srun --exclusive -n 1 ../call_dmtcp.sh "../example" 5 &
 cd ..
 
 mkdir job_1
 cd job_1
-srun --exclusive ../run_example.sh
+srun --exclusive -n 1 ../call_dmtcp.sh "../example" 5 &
+
+wait

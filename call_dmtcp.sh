@@ -5,6 +5,9 @@ export DMTCP_QUIET=2
 runcmd="../example"
 tint=5
 
+runcmd=$1
+tint=$2
+
 if [ -f "$RESTARTSCRIPT" ]
 then
     echo "Start with checkpoint executable"
