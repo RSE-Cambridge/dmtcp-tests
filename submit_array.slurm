@@ -42,7 +42,7 @@
 module purge                               # Removes all modules still loaded
 module load rhel7/default-peta4            # REQUIRED - loads the basic environment
 module load use.own                        # This line loads the own module list
-module load dmtcp/dmtcp-2.3.1
+module load dmtcp/2.3.1
 
 #! The variable $SLURM_ARRAY_TASK_ID contains the array index for each job.
 #! In this example, each job will be passed its index, so each output file will contain a different value
