@@ -23,7 +23,7 @@ else
     sleep 1
     cport=$(<cport.txt)
     echo "$cport"
-    CMD="dmtcp_launch -i "$tint" -p "$cport" "$runcmd
+    CMD="dmtcp_launch --ckpt-open-files -i "$tint" -p "$cport" "$runcmd
     echo $CMD
     eval $CMD
 fi
