@@ -27,3 +27,5 @@ else
     echo $CMD
     eval $CMD
 fi
+
+sleep 60s
