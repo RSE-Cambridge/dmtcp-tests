@@ -25,7 +25,8 @@ module load rhel7/default-peta4
 module load use.own
 module load dmtcp/2.6.0-intel-17.0.4
 ulimit -s 8192
-module load gcc-7.1.0-gcc-4.8.5-dbiklo5
+module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
+module load openmpi-4.0.1-gcc-7.2.0-myumaue
 
 #! Command line that we want to run:
 srun ./example
