@@ -7,7 +7,6 @@
 #SBATCH --ntasks=4
 #SBATCH --cpus-per-task=1
 #SBATCH --time=00:03:00
-#SBATCH --mem=200mb
 
 #! This is the partition name. This will request for a node with 6GB RAM for each task
 #SBATCH -p skylake
@@ -28,29 +27,44 @@ ulimit -s 8192
 module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
 module load openmpi-4.0.1-gcc-7.2.0-myumaue
 
-#! Command line that we want to run:
+# configure openmpi environment to use tcp
+export OMPI_MCA_mtl=^psm
+export OMPI_MCA_btl=self,tcp
 
-runcmd="srun ./example"
+h=`hostname`
+echo $h
+
+runcmd="./example_mpi"
 tint=30
+
+export DMTCP_DL_PLUGIN=0
 
 echo "Start coordinator"
 date
 eval "dmtcp_coordinator --daemon --coord-logfile dmtcp_log.txt --exit-after-ckpt --exit-on-last -i "$tint" --port-file cport.txt -p 0"
 sleep 2
 cport=$(<cport.txt)
-echo "$cport"
+echo $cport
+h=`hostname`
+echo $h
 
-if [ -f "$RESTARTSCRIPT" ]
+export DMTCP_COORD_HOST=$h
+export DMTCP_COORD_PORT=$cport
+
+
+if [ -f "$RESTARTSCRIPT" ] 
 then
     echo "Resume the application"
-    CMD="dmtcp_restart -p "$cport" -i "$tint" ckpt*.dmtcp"
+    #CMD="dmtcp_restart -p "$cport" -i "$tint" ckpt*.dmtcp"
+    CMD="/bin/bash ./dmtcp_restart_script.sh -h $DMTCP_COORD_HOST -p $DMTCP_COORD_PORT"
     echo $CMD
     eval $CMD
 else
     echo "Start the application"
-    CMD="dmtcp_launch --rm --no-gzip -h localhost -p "$cport" "$runcmd
-    echo $CMD
-    eval $CMD
+    mpirun dmtcp_launch --no-gzip ./example_mpi
+    #CMD="mpirun -np 4 ./run_dmtcp.sh"
+    #echo $CMD
+    #eval $CMD
 fi
 
 echo "Stopped program execution"
