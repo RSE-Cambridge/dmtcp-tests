@@ -25,20 +25,11 @@ module load use.own
 module load dmtcp/2.6.0-intel-17.0.4
 ulimit -s 8192
 
-# configure openmpi environment to use tcp
-#export OMPI_MCA_mtl=^psm
-#export OMPI_MCA_btl=self,tcp
-
 RESTARTSCRIPT="dmtcp_restart_script.sh"
 export DMTCP_QUIET=2
 
-h=`hostname`
-echo $h
-
 runcmd="./example_mpi"
 tint=30
-
-export DMTCP_DL_PLUGIN=0
 
 echo "Start coordinator"
 date
@@ -55,16 +46,10 @@ export DMTCP_COORD_PORT=$cport
 if [ -f "$RESTARTSCRIPT" ] 
 then
     echo "Resume the application"
-    #CMD="dmtcp_restart -p "$cport" -i "$tint" ckpt*.dmtcp"
-    CMD="./dmtcp_restart_script.sh -h $DMTCP_COORD_HOST -p $DMTCP_COORD_PORT"
-    echo $CMD
-    eval $CMD
+    ./dmtcp_restart_script.sh -h $DMTCP_COORD_HOST -p $DMTCP_COORD_PORT
 else
     echo "Start the application"
-    mpirun dmtcp_launch --no-gzip ./example_mpi
-    #CMD="mpirun -np 4 ./run_dmtcp.sh"
-    #echo $CMD
-    #eval $CMD
+    mpirun dmtcp_launch --no-gzip $runcmd
 fi
 
 echo "Stopped program execution"
