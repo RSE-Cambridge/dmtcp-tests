@@ -3,7 +3,6 @@
 #! Make sure you only have comments and #SBATCH directives between here and the end of the #SBATCH directives, or things will break
 #! Name of the job:
 #SBATCH -J test_dmtcp
-#! Account name for Gilligan group, use SL2 for paying queue:
 #SBATCH -A SUPPORT-CPU
 #! Output filename:
 #! %A means slurm job ID and %a means array index
