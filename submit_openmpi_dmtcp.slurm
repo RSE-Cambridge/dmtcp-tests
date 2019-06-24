@@ -24,12 +24,10 @@ module load rhel7/default-peta4
 module load use.own
 module load dmtcp/2.6.0-intel-17.0.4
 ulimit -s 8192
-module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
-module load openmpi-4.0.1-gcc-7.2.0-myumaue
 
 # configure openmpi environment to use tcp
-export OMPI_MCA_mtl=^psm
-export OMPI_MCA_btl=self,tcp
+#export OMPI_MCA_mtl=^psm
+#export OMPI_MCA_btl=self,tcp
 
 RESTARTSCRIPT="dmtcp_restart_script.sh"
 export DMTCP_QUIET=2
@@ -53,7 +51,6 @@ echo $h
 
 export DMTCP_COORD_HOST=$h
 export DMTCP_COORD_PORT=$cport
-
 
 if [ -f "$RESTARTSCRIPT" ] 
 then
