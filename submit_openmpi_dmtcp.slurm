@@ -31,6 +31,9 @@ module load openmpi-4.0.1-gcc-7.2.0-myumaue
 export OMPI_MCA_mtl=^psm
 export OMPI_MCA_btl=self,tcp
 
+RESTARTSCRIPT="dmtcp_restart_script.sh"
+export DMTCP_QUIET=2
+
 h=`hostname`
 echo $h
 
@@ -56,7 +59,7 @@ if [ -f "$RESTARTSCRIPT" ]
 then
     echo "Resume the application"
     #CMD="dmtcp_restart -p "$cport" -i "$tint" ckpt*.dmtcp"
-    CMD="/bin/bash ./dmtcp_restart_script.sh -h $DMTCP_COORD_HOST -p $DMTCP_COORD_PORT"
+    CMD="./dmtcp_restart_script.sh -h $DMTCP_COORD_HOST -p $DMTCP_COORD_PORT"
     echo $CMD
     eval $CMD
 else
