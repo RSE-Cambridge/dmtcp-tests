@@ -3,10 +3,10 @@
 #SBATCH -A SUPPORT-CPU
 #SBATCH --output=example_mpi.out
 
-#SBATCH --nodes=1
-#SBATCH --ntasks=4
+#SBATCH --nodes=3
+#SBATCH --ntasks=96
 #SBATCH --cpus-per-task=1
-#SBATCH --time=00:03:00
+#SBATCH --time=00:05:00
 
 #! This is the partition name. This will request for a node with 6GB RAM for each task
 #SBATCH -p skylake
@@ -26,10 +26,10 @@ module load dmtcp/2.6.0-intel-17.0.4
 ulimit -s 8192
 
 RESTARTSCRIPT="dmtcp_restart_script.sh"
-export DMTCP_QUIET=2
+export DMTCP_QUIET=0
 
 runcmd="./example_mpi"
-tint=30
+tint=120
 
 echo "Start coordinator"
 date
@@ -43,13 +43,16 @@ echo $h
 export DMTCP_COORD_HOST=$h
 export DMTCP_COORD_PORT=$cport
 
+HOSTFILE=hostfile
+echo "SLURM_JOB_NODELIST" | scontrol show hostname > $HOSTFILE
+
 if [ -f "$RESTARTSCRIPT" ] 
 then
     echo "Resume the application"
     ./dmtcp_restart_script.sh -h $DMTCP_COORD_HOST -p $DMTCP_COORD_PORT
 else
     echo "Start the application"
-    mpirun dmtcp_launch --no-gzip $runcmd
+    mpirun -env I_MPI_FABRICS tcp -ppn 32 -np 96 dmtcp_launch --no-gzip --rm $runcmd
 fi
 
 echo "Stopped program execution"
