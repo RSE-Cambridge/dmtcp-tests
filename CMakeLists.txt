@@ -1,7 +1,12 @@
-cmake_minimum_required(VERSION 3.13.4)
-project(dmtcp_example)
+cmake_minimum_required(VERSION 3.13)
 
-add_executable(example example.cpp)
-target_compile_features(example PRIVATE cxx_std_14)
-add_executable(example_mpi example_mpi.cpp)
-target_compile_features(example_mpi PRIVATE cxx_std_14)
+project(dmtcp_examples
+        VERSION 1.0.0
+        DESCRIPTION "DMCTP Slurm examples.")
+
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_CXX_STANDARD 17)
+
+add_subdirectory(serial-job)
+add_subdirectory(array-job)
+add_subdirectory(mpi-job)
