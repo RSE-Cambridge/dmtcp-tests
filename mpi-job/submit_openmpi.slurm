@@ -18,7 +18,7 @@ module load openmpi/3.1.4-gcc-7.2.0
 RESTARTSCRIPT="dmtcp_restart_script.sh"
 export DMTCP_QUIET=2
 
-runcmd=./example
+runcmd=./example_mpi
 tint=5
 
 echo "Start coordinator"

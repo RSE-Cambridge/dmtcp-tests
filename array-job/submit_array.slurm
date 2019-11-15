@@ -28,7 +28,7 @@ cd $jobDir
 RESTARTSCRIPT="dmtcp_restart_script.sh"
 export DMTCP_QUIET=2
 
-runcmd="./example 5"
+runcmd="./example_array 5"
 tint=5
 
 echo "Start coordinator"
