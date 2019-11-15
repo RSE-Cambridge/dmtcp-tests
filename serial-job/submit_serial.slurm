@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -J dmtcp_serial
-#SBATCH -A SUPPORT_CPU
+#SBATCH -A SUPPORT-CPU
 #SBATCH --output=dmtcp_serial_%A.out
 #SBATCH --error=dmtcp_serial_%A.err
 #SBATCH --nodes=1
