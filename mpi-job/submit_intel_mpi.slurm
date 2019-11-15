@@ -29,7 +29,7 @@ RESTARTSCRIPT="dmtcp_restart_script.sh"
 export DMTCP_QUIET=0
 
 runcmd="./example_mpi"
-tint=120
+tint=30
 
 echo "Start coordinator"
 date
