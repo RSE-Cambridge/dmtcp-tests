@@ -4,7 +4,7 @@ Several simple examples that demonstrate how to use DMTCP to checkpoint serial a
 
 To build the project on CSD3 (Cambridge Cluster) use the following
     
-    module load cmake/latest openmpi/3.1.4-gcc-7.2.0
+    module load cmake/latest gcc/9 openmpi/gcc/9.2/4.0.2
     
     mkdir build
     cd build
