@@ -1,22 +1,13 @@
 #!/bin/bash
-#SBATCH -J example_mpi
+#SBATCH -J dmtcp_mpi
 #SBATCH -A SUPPORT-CPU
-#SBATCH --output=example_mpi.out
-
+#SBATCH --output=dmtcp_mpi_%A.out
+#SBATCH --error=dmtcp_mpi_%A.err
 #SBATCH --nodes=3
 #SBATCH --ntasks=96
 #SBATCH --cpus-per-task=1
 #SBATCH --time=00:05:00
-
-#! This is the partition name. This will request for a node with 6GB RAM for each task
 #SBATCH -p skylake
-
-#! mail alert at start, end and abortion of execution
-#! emails will default to going to your email address
-#! you can specify a different email address manually if needed.
-##SBATCH --mail-type=ALL
-
-#! Don't put any #SBATCH directives below this line
 
 . /etc/profile.d/modules.sh
 module purge
@@ -29,7 +20,7 @@ RESTARTSCRIPT="dmtcp_restart_script.sh"
 export DMTCP_QUIET=0
 
 runcmd="./example_mpi"
-tint=30
+tint=120
 
 echo "Start coordinator"
 date
