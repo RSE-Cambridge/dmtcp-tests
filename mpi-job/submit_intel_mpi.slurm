@@ -12,7 +12,6 @@
 . /etc/profile.d/modules.sh
 module purge
 module load rhel7/default-peta4
-module load use.own
 module load dmtcp/2.6.0-intel-17.0.4
 ulimit -s 8192
 
