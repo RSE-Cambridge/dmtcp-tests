@@ -49,4 +49,6 @@ int main(int argc, char** argv) {
 
     // Finalize the MPI environment.
     MPI_Finalize();
+
+    std::cout << "Example program end."	<< std::endl;
 }

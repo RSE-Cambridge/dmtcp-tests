@@ -27,5 +27,7 @@ int main(int argc, char *argv[])
 
     output_file.close();
 
+    std::cout << "Example program end." << std::endl;
+
     return 0;
 }
