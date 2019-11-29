@@ -28,7 +28,7 @@ cd $jobDir
 RESTARTSCRIPT="dmtcp_restart_script.sh"
 export DMTCP_QUIET=2
 
-runcmd="./example_array 5"
+runcmd="../example_array 5"
 tint=30
 
 echo "Start coordinator"
@@ -39,9 +39,6 @@ cport=$(<cport.txt)
 echo "$cport"
 h=`hostname`
 echo $h
-
-export DMTCP_COORD_HOST=`hostname`
-export DMTCP_COORD_PORT=$cport
 
 if [ -f "$RESTARTSCRIPT" ]
 then
@@ -58,5 +55,3 @@ fi
 
 echo "Stopped program execution"
 date
-sleep 2
-dmtcp_command -h $DMTCP_COORD_HOST -p $DMTCP_COORD_PORT --quit
